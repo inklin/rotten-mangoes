@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :users, only: [:new, :create]
   resources :movies
   # get 'movies',          to: 'movies#index'
   # get 'movies/new',      to: 'movies#new'
