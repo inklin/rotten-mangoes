@@ -2,6 +2,6 @@
 <p><%= @movie.director %></p>
 <p>Runtime: <%= @movie.runtime_in_minutes %></p>
 <p>Description: <%= @movie.description %></p>
-<p>Movie Poster: 
-  <img src="<%= @movie.poster_image_url %>" />
-</p>
+<img src="<%= @movie.poster_image_url %>" />
+
+<%= link_to "Back to Movies", movies_path %>
