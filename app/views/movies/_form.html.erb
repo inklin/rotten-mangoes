@@ -1,5 +1,14 @@
 <%= form_for @movie do |f| %>
-  <div>
+  <% if @movie.errors.any? %>
+    <div>
+      <%= pluralize(@movie.errors.count, "error") %>prevented this movie from being added.
+      <ul>
+        <% @movie.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    <div>
+  <% end %>
     <%= f.label "title" %><br>
     <%= f.text_field "title" %>
   </div>
