@@ -2,7 +2,9 @@ Rails.application.routes.draw do
 
   resources :sessions, only: [:new, :create, :destroy]
   resources :users, only: [:new, :create]
-  resources :movies
+  resources :movies do
+    resources :reviews, only: [:new, :create]
+  end
   # get 'movies',          to: 'movies#index'
   # get 'movies/new',      to: 'movies#new'
   # get 'movies/:id/edit', to: 'movies#edit'
