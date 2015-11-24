@@ -2,7 +2,7 @@
 <%= form_for @user do |f| %>
   <% if @user.errors.any? %>
     <div>
-      <%= pluralize(@user.errors.count, "error") %>prevented the account from being created.
+      <%= pluralize(@user.errors.count, "error") %> prevented the account from being created.
       <ul>
         <% @user.errors.full_messages.each do |message| %>
           <li><%= message %></li>

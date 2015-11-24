@@ -1,7 +1,7 @@
 <%= form_for @movie do |f| %>
   <% if @movie.errors.any? %>
     <div>
-      <%= pluralize(@movie.errors.count, "error") %>prevented this movie from being added.
+      <%= pluralize(@movie.errors.count, "error") %> prevented this movie from being added.
       <ul>
         <% @movie.errors.full_messages.each do |message| %>
           <li><%= message %></li>

@@ -16,4 +16,5 @@ class User < ActiveRecord::Base
     else
       render :new
     end
+  end
 end
