@@ -12,6 +12,10 @@ class MoviesController < ApplicationController
     @movie = Movie.new
   end
 
+  def edit
+    @movie = Movie.find(params[:id])
+  end
+
   def create
     @movie = Movie.new(movie_params)
 
@@ -20,10 +24,6 @@ class MoviesController < ApplicationController
     else
       render :new
     end
-  end
-
-  def edit
-    @movie = Movie.find(params[:id])
   end
 
   def update
@@ -37,6 +37,9 @@ class MoviesController < ApplicationController
   end
 
   def destroy
+    @movie = Movie.find(params[:id])
+    @movie.destroy
+    redirect_to movies_path
   end
 
   protected
