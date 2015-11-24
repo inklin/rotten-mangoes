@@ -1,33 +1,3 @@
 <%= link_to "Back to movie", movie_path(@movie) %>
 
-<h2>Edit Movie</h2>
-<%= form_for @movie do |f| %>
-  <div>
-    <%= f.label "title" %><br>
-    <%= f.text_field "title" %>
-  </div>
-  <div>
-    <%= f.label "director" %><br>
-    <%= f.text_field "director" %>
-  </div>
-  <div>
-    <%= f.label "runtime" %><br>
-    <%= f.number_field "runtime_in_minutes" %>
-  </div>
-  <div>
-    <%= f.label "poster image" %><br>
-    <%= f.text_field "poster_image_url" %>
-  </div>
-  <div>
-    <%= f.label "release date" %><br>
-    <%= f.date_field "release_date" %>
-  </div>
-  <div>
-    <%= f.label "description" %><br>
-    <%= f.text_area "description" %>
-  </div>
-  <div>
-    <%= f.submit "Save" %>
-  </div>
-
-<% end %>
+<%= render 'form' %>
