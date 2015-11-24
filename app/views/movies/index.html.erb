@@ -3,7 +3,7 @@
 <hr>
 <% @movies.each do |movie| %>
   <div>
-    <%= link_to image_tag(movie.poster_image_url), movie_path(movie) %>
+    <%= image_tag movie.poster_url(:thumb).to_s %>
     <h2><%= link_to movie.title, movie_path(movie) %></h2>
     <h3>Director: <%= movie.director %></h3>
     <h4>Runtime: <%= movie.runtime_in_minutes %></h4>
