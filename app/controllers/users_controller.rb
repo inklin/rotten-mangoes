@@ -14,6 +14,10 @@ class UsersController < ApplicationController
     end
   end
 
+  def full_name
+    "#{firstname} #{lastname}"
+  end
+
   protected
 
   def user_params
