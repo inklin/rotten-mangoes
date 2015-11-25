@@ -22,6 +22,16 @@ class Movie < ActiveRecord::Base
 
   protected
 
+  def self.search(search)
+    if search
+      puts "Search is #{search.inspect}"
+      puts "Search title is #{search['title']}"
+      self.where('title LIKE ?', "%#{search['title']}%")
+    else
+      self.all
+    end
+  end
+
   def release_date_is_in_the_past
     if release_date.present?
       errors.add(:release_date, "should be in the past") if release_date > Date.today

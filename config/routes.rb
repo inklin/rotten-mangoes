@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 
   root to: 'movies#index'
+
+  resources :searches, only: [:create, :new]
   resources :sessions, only: [:new, :create, :destroy]
   resources :users, only: [:new, :create, :show]
   resources :movies do
@@ -8,7 +10,7 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
-    resources :users#, only: [:index, :show, :new, :create, :edit]
+    resources :users
   end
   
 end
