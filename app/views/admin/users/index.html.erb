@@ -1,5 +1,6 @@
 <h1>List of all users</h1>
 
+<%= link_to "Create new user", new_admin_user_path %>
 <%= paginate @users %>
 <% @users.each do |user| %>
   <div>
