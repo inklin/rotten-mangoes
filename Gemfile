@@ -41,3 +41,10 @@ gem 'bcrypt', '~> 3.1.7'
 # Use Carrierwave for image upload
 gem 'rmagick'
 gem 'carrierwave'
+
+# Use Kaminari for pagination
+gem 'kaminari'
+
+# Use Factory Girl and Faker for development
+gem 'factory_girl_rails', group: :development
+gem 'faker', group: :development
