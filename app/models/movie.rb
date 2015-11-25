@@ -7,7 +7,7 @@ class Movie < ActiveRecord::Base
   validates :runtime_in_minutes, numericality: { only_integer: true }
   validates :description, presence: true
   validates :release_date, presence: true
-
+  
   validate :release_date_is_in_the_past
 
   mount_uploader :poster, PosterUploader
