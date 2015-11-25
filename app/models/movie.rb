@@ -24,9 +24,8 @@ class Movie < ActiveRecord::Base
 
   def self.search(search)
     if search
-      puts "Search is #{search.inspect}"
-      puts "Search title is #{search['title']}"
-      self.where('title LIKE ?', "%#{search['title']}%")
+      self.all.where('title LIKE ?', "%#{search[:title]}%").
+              where('director LIKE ?', "%#{search[:director]}%")
     else
       self.all
     end
