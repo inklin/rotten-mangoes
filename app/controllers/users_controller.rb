@@ -14,8 +14,8 @@ class UsersController < ApplicationController
     end
   end
 
-  def full_name
-    "#{firstname} #{lastname}"
+  def show
+    @user = User.find(params[:id])
   end
 
   protected
@@ -23,5 +23,4 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:email, :firstname, :lastname, :password, :password_confirmation)
   end
-
 end
