@@ -23,22 +23,42 @@ class Movie < ActiveRecord::Base
   protected
 
   def self.search(search)
+    @movies = all
     if search
-      duration = duration_min_max(search[:duration])
-      @movies = self.all.where('title LIKE ?', "%#{search[:title]}%").
-                        where('director LIKE ?', "%#{search[:director]}%")
-      @movies = @movies.where('runtime_in_minutes > ? ', duration[:min]) if duration[:min]
-      @movies = @movies.where('runtime_in_minutes < ?', duration[:max]) if duration[:max]
-      @movies
-    else
-      self.all
+      @movies = @movies.search_title(search[:title]) unless search[:title].blank?
+      @movies = @movies.search(search[:director]) unless search[:director].blank?
+
+      unless search[:duration].blank?
+        duration = duration_min_max(search[:duration])
+        @movies = @movies.runtime_longer_than(duration[:min]) if duration[:min]
+        @movies = @movies.runtime_shorter_than(duration[:max]) if duration[:max]
+      end
     end
+    @movies
+  end
+
+  def self.search_title(title)
+    where('title LIKE ?', "%#{title}%")
+  end
+
+  def self.search_director(director)
+    where('director LIKE ?', "%#{director}%")
+  end
+
+  def self.runtime_longer_than(min_time)
+    where('runtime_in_minutes > ? ', min_time)
+  end
+
+  def self.runtime_shorter_than(max_time)
+    where('runtime_in_minutes < ? ', max_time)
   end
 
   def self.duration_min_max(duration_string)
     duration_array = duration_string.split('-')
     { min: duration_array[0], max: duration_array[1] }
   end
+
+  private
 
   def release_date_is_in_the_past
     if release_date.present?
