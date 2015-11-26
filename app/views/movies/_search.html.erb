@@ -8,7 +8,7 @@
     <%= text_field :search, :director %>
   <div>
   <div>
-    <%= select :search, :duration, options_for_select(MoviesHelper::DURATION_OPTIONS) %>
+    <%= select :search, :duration, options_for_select(MoviesHelper::DURATION_OPTIONS), { include_blank: "Choose movie duration" } %>
   </div>
   <div>
     <%= submit_tag "Search movies", name: nil %>

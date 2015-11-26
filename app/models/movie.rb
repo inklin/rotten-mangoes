@@ -26,11 +26,9 @@ class Movie < ActiveRecord::Base
     if search
       duration = duration_min_max(search[:duration])
       @movies = self.all.where('title LIKE ?', "%#{search[:title]}%").
-                        where('director LIKE ?', "%#{search[:director]}%").
-                        where('runtime_in_minutes > ? ', duration[:min])
-      if duration[:max]
-        @movies = @movies.where('runtime_in_minutes < ?', duration[:max])
-      end
+                        where('director LIKE ?', "%#{search[:director]}%")
+      @movies = @movies.where('runtime_in_minutes > ? ', duration[:min]) if duration[:min]
+      @movies = @movies.where('runtime_in_minutes < ?', duration[:max]) if duration[:max]
       @movies
     else
       self.all
