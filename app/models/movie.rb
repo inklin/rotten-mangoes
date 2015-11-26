@@ -24,11 +24,22 @@ class Movie < ActiveRecord::Base
 
   def self.search(search)
     if search
-      self.all.where('title LIKE ?', "%#{search[:title]}%").
-              where('director LIKE ?', "%#{search[:director]}%")
+      duration = duration_min_max(search[:duration])
+      @movies = self.all.where('title LIKE ?', "%#{search[:title]}%").
+                        where('director LIKE ?', "%#{search[:director]}%").
+                        where('runtime_in_minutes > ? ', duration[:min])
+      if duration[:max]
+        @movies = @movies.where('runtime_in_minutes < ?', duration[:max])
+      end
+      @movies
     else
       self.all
     end
+  end
+
+  def self.duration_min_max(duration_string)
+    duration_array = duration_string.split('-')
+    { min: duration_array[0], max: duration_array[1] }
   end
 
   def release_date_is_in_the_past
