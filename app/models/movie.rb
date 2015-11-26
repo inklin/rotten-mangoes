@@ -25,8 +25,7 @@ class Movie < ActiveRecord::Base
   def self.search(search)
     @movies = all
     if search
-      @movies = @movies.search_title(search[:title]) unless search[:title].blank?
-      @movies = @movies.search(search[:director]) unless search[:director].blank?
+      @movies = @movies.search_keyword(search[:keyword]) unless search[:keyword].blank?
 
       unless search[:duration].blank?
         duration = duration_min_max(search[:duration])
@@ -37,12 +36,8 @@ class Movie < ActiveRecord::Base
     @movies
   end
 
-  def self.search_title(title)
-    where('title LIKE ?', "%#{title}%")
-  end
-
-  def self.search_director(director)
-    where('director LIKE ?', "%#{director}%")
+  def self.search_keyword(keyword)
+    where('title LIKE :word or director LIKE :word', { word: "%#{keyword}%" })
   end
 
   def self.runtime_longer_than(min_time)

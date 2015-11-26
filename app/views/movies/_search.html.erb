@@ -2,12 +2,8 @@
 
 <%= form_tag movies_path, method: "get" do %>
   <div>
-    <%= label :search, :title %>
-    <%= text_field :search, :title %>
-  <div>
-  <div>
-    <%= label :search, :director %>
-    <%= text_field :search, :director %>
+    <%= label :search, :keyword %>
+    <%= text_field :search, :keyword %>
   <div>
   <div>
     <%= select :search, :duration, options_for_select(MoviesHelper::DURATION_OPTIONS), { include_blank: "Choose movie duration" } %>
