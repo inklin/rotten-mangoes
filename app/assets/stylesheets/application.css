@@ -14,3 +14,9 @@
  *= require_tree .
  *= require_self
  */
+
+.movie-thumb {
+  display: inline-block;
+  padding: 20px;
+  text-align: center;
+}

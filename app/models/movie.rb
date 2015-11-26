@@ -20,6 +20,10 @@ class Movie < ActiveRecord::Base
     end
   end
 
+  def review_avg_percent
+    review_average * 10
+  end
+
   protected
 
   def self.search(search)
