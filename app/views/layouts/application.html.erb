@@ -10,6 +10,7 @@
   <% flash.each do |key, value| %>
     <%= content_tag(:div, value) %>
   <% end %>
+  <%= render 'layouts/nav' %>
   <%= yield %>
   <%= render 'layouts/footer' %>
 </body>
