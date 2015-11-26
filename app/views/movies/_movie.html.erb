@@ -1,0 +1,9 @@
+<div>
+  <%= image_tag movie.poster_url(:thumb).to_s %>
+  <h2><%= link_to movie.title, movie_path(movie) %></h2>
+  <h3>Director: <%= movie.director %></h3>
+  <h4>Runtime: <%= movie.runtime_in_minutes %></h4>
+  <h4>Release date: <%= formatted_date(movie.release_date) %></h4>
+  <h4>Average rating: <%= movie.review_average %>/10</h4>
+  <p>Description: <%= movie.description %></p>
+</div>
