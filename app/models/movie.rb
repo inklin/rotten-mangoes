@@ -27,7 +27,8 @@ class Movie < ActiveRecord::Base
   protected
 
   def self.search(search)
-    @movies = Movies.search_keyword(search[:keyword]) unless search[:keyword].blank?
+    @movies = Movie.all
+    @movies = @movies.search_keyword(search[:keyword]) unless search[:keyword].blank?
 
     unless search[:duration].blank?
       duration = duration_min_max(search[:duration])
