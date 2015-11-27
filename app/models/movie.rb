@@ -27,17 +27,28 @@ class Movie < ActiveRecord::Base
   protected
 
   def self.search(search)
-    @movies = all
-    if search
-      @movies = @movies.search_keyword(search[:keyword]) unless search[:keyword].blank?
+    @movies = Movies.search_keyword(search[:keyword]) unless search[:keyword].blank?
 
-      unless search[:duration].blank?
-        duration = duration_min_max(search[:duration])
-        @movies = @movies.runtime_longer_than(duration[:min]) if duration[:min]
-        @movies = @movies.runtime_shorter_than(duration[:max]) if duration[:max]
-      end
+    unless search[:duration].blank?
+      duration = duration_min_max(search[:duration])
+      @movies = @movies.runtime_longer_than(duration[:min]) if duration[:min]
+      @movies = @movies.runtime_shorter_than(duration[:max]) if duration[:max]
     end
     @movies
+  end
+
+  def self.sort(sort)
+    case sort
+    when "title"
+      order(title: :asc)
+    when "newest"
+      order(release_date: :desc)
+    when "fresh"
+      joins("LEFT JOIN reviews ON movies.id = reviews.movie_id").
+      group("movies.id").order("AVG(reviews.rating_out_of_ten) DESC")
+    else
+      all
+    end
   end
 
   def self.search_keyword(keyword)
